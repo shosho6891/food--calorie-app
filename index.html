@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fast Food Calories</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    body { font-family: Arial; padding: 16px; background:#f5f5f5 }
+    h1 { text-align:center }
+    select, button { width:100%; padding:10px; margin:10px 0 }
+    .card { background:white; padding:15px; border-radius:10px }
+  </style>
+</head>
+<body>
+
+<h1>🍔 Fast Food Calories</h1>
+
+<div class="card">
+  <label>Choose food:</label>
+  <select id="food">
+    <option value="295">🍟 French Fries (295 kcal)</option>
+    <option value="250">🍔 Burger (250 kcal)</option>
+    <option value="300">🍕 Pizza Slice (300 kcal)</option>
+    <option value="150">🌭 Hot Dog (150 kcal)</option>
+    <option value="200">🍗 Fried Chicken (200 kcal)</option>
+  </select>
+
+  <button onclick="show()">Show Calories</button>
+  <h2 id="result"></h2>
+</div>
+
+<script>
+function show(){
+  let kcal = document.getElementById("food").value;
+  document.getElementById("result").innerText = kcal + " kcal";
+}
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
+</script>
+
+</body>
+  </html>
