@@ -11,7 +11,7 @@
     button, select { width:100%; padding:12px; margin:8px 0; font-size:16px }
     .card { background:white; padding:15px; border-radius:10px; margin-top:10px }
     .tabs button { width:50% }
-    label { font-weight:bold; margin-top:10px; display:block }
+    label { font-weight:bold; display:block; margin-top:10px }
   </style>
 </head>
 <body>
@@ -25,32 +25,28 @@
 
 <!-- FAST FOOD -->
 <div id="fast" class="card">
-  <h3>Fast Food</h3>
-
   <label>Chọn món</label>
   <select id="fastFood">
-    <option value="295">🍟 Khoai tây chiên (295 kcal)</option>
-    <option value="250">🍔 Burger (250 kcal)</option>
-    <option value="300">🍕 Pizza (300 kcal)</option>
-    <option value="150">🌭 Hot Dog (150 kcal)</option>
-    <option value="200">🍗 Gà rán (200 kcal)</option>
+    <option value="295">🍟 Khoai tây chiên</option>
+    <option value="250">🍔 Burger</option>
+    <option value="300">🍕 Pizza</option>
+    <option value="200">🍗 Gà rán</option>
   </select>
-
   <button onclick="calcFast()">Xem Calo</button>
 </div>
 
 <!-- VIET FOOD -->
 <div id="viet" class="card" style="display:none">
-  <h3>Món Việt</h3>
+
+  <label>Nhóm món</label>
+  <select id="vietGroup" onchange="loadVietFood()">
+    <option value="main">🍜 Món chính</option>
+    <option value="veg">🥦 Rau – củ – quả</option>
+    <option value="seed">🌰 Hạt – lành mạnh</option>
+  </select>
 
   <label>Chọn món</label>
-  <select id="vietFood">
-    <option value="pho">🍜 Phở bò</option>
-    <option value="comtam">🍚 Cơm tấm</option>
-    <option value="bunbo">🍲 Bún bò Huế</option>
-    <option value="banhmi">🥖 Bánh mì thịt</option>
-    <option value="hutieu">🍜 Hủ tiếu</option>
-  </select>
+  <select id="vietFood"></select>
 
   <label>Chọn khẩu phần</label>
   <select id="portion">
@@ -62,35 +58,71 @@
   <button onclick="calcViet()">Xem Calo</button>
 </div>
 
-<h2 id="result" style="text-align:center;margin-top:15px"></h2>
+<h2 id="result" style="text-align:center"></h2>
 
 <script>
+const vietData = {
+  main: {
+    "Phở bò": { it:380, vua:450, nhieu:520 },
+    "Phở gà": { it:350, vua:420, nhieu:500 },
+    "Bún đậu mắm tôm": { it:450, vua:550, nhieu:650 },
+    "Bún chả": { it:480, vua:560, nhieu:650 },
+    "Cơm tấm": { it:500, vua:600, nhieu:700 },
+    "Cơm gà xối mỡ": { it:550, vua:650, nhieu:750 },
+    "Mì Quảng": { it:430, vua:500, nhieu:580 }
+  },
+  veg: {
+    "Rau luộc": { it:50, vua:80, nhieu:120 },
+    "Salad rau": { it:70, vua:120, nhieu:180 },
+    "Bông cải xanh": { it:40, vua:70, nhieu:100 },
+    "Cà rốt": { it:35, vua:60, nhieu:90 },
+    "Chuối": { it:90, vua:120, nhieu:150 },
+    "Táo": { it:60, vua:90, nhieu:120 }
+  },
+  seed: {
+    "Hạt điều": { it:150, vua:200, nhieu:250 },
+    "Hạnh nhân": { it:140, vua:190, nhieu:240 },
+    "Óc chó": { it:160, vua:210, nhieu:260 },
+    "Yến mạch": { it:120, vua:180, nhieu:240 },
+    "Đậu phộng": { it:150, vua:200, nhieu:260 }
+  }
+};
+
 function showTab(tab){
-  document.getElementById("fast").style.display = tab === "fast" ? "block" : "none";
-  document.getElementById("viet").style.display = tab === "viet" ? "block" : "none";
-  document.getElementById("result").innerText = "";
+  document.getElementById("fast").style.display = tab==="fast"?"block":"none";
+  document.getElementById("viet").style.display = tab==="viet"?"block":"none";
+  document.getElementById("result").innerText="";
+}
+
+function loadVietFood(){
+  let group = document.getElementById("vietGroup").value;
+  let foodSelect = document.getElementById("vietFood");
+  foodSelect.innerHTML = "";
+  for(let food in vietData[group]){
+    let opt = document.createElement("option");
+    opt.value = food;
+    opt.textContent = food;
+    foodSelect.appendChild(opt);
+  }
 }
 
 function calcFast(){
-  let kcal = document.getElementById("fastFood").value;
-  document.getElementById("result").innerText = kcal + " kcal";
+  document.getElementById("result").innerText =
+    document.getElementById("fastFood").value + " kcal";
 }
 
 function calcViet(){
-  const data = {
-    pho: { it:380, vua:450, nhieu:520 },
-    comtam: { it:500, vua:600, nhieu:700 },
-    bunbo: { it:420, vua:500, nhieu:580 },
-    banhmi: { it:350, vua:400, nhieu:450 },
-    hutieu: { it:380, vua:430, nhieu:500 }
-  };
-
-  let food = document.getElementById("vietFood").value;
-  let portion = document.getElementById("portion").value;
-
+  let group = vietGroup.value;
+  let food = vietFood.value;
+  let portion = portionSelect.value;
   document.getElementById("result").innerText =
-    data[food][portion] + " kcal";
+    vietData[group][food][portion] + " kcal";
 }
+
+const vietGroup = document.getElementById("vietGroup");
+const vietFood = document.getElementById("vietFood");
+const portionSelect = document.getElementById("portion");
+loadVietFood();
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js');
@@ -98,4 +130,4 @@ if ('serviceWorker' in navigator) {
 </script>
 
 </body>
-                             </html>
+  </html>
