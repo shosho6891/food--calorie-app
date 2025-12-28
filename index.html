@@ -8,9 +8,10 @@
   <style>
     body { font-family: Arial; padding: 16px; background:#f5f5f5 }
     h1 { text-align:center }
-    button, select { width:100%; padding:10px; margin:6px 0 }
+    button, select { width:100%; padding:12px; margin:8px 0; font-size:16px }
     .card { background:white; padding:15px; border-radius:10px; margin-top:10px }
     .tabs button { width:50% }
+    label { font-weight:bold; margin-top:10px; display:block }
   </style>
 </head>
 <body>
@@ -25,6 +26,8 @@
 <!-- FAST FOOD -->
 <div id="fast" class="card">
   <h3>Fast Food</h3>
+
+  <label>Chọn món</label>
   <select id="fastFood">
     <option value="295">🍟 Khoai tây chiên (295 kcal)</option>
     <option value="250">🍔 Burger (250 kcal)</option>
@@ -32,6 +35,7 @@
     <option value="150">🌭 Hot Dog (150 kcal)</option>
     <option value="200">🍗 Gà rán (200 kcal)</option>
   </select>
+
   <button onclick="calcFast()">Xem Calo</button>
 </div>
 
@@ -39,10 +43,59 @@
 <div id="viet" class="card" style="display:none">
   <h3>Món Việt</h3>
 
+  <label>Chọn món</label>
   <select id="vietFood">
     <option value="pho">🍜 Phở bò</option>
     <option value="comtam">🍚 Cơm tấm</option>
     <option value="bunbo">🍲 Bún bò Huế</option>
     <option value="banhmi">🥖 Bánh mì thịt</option>
     <option value="hutieu">🍜 Hủ tiếu</option>
-  </select
+  </select>
+
+  <label>Chọn khẩu phần</label>
+  <select id="portion">
+    <option value="it">Ít</option>
+    <option value="vua">Vừa</option>
+    <option value="nhieu">Nhiều</option>
+  </select>
+
+  <button onclick="calcViet()">Xem Calo</button>
+</div>
+
+<h2 id="result" style="text-align:center;margin-top:15px"></h2>
+
+<script>
+function showTab(tab){
+  document.getElementById("fast").style.display = tab === "fast" ? "block" : "none";
+  document.getElementById("viet").style.display = tab === "viet" ? "block" : "none";
+  document.getElementById("result").innerText = "";
+}
+
+function calcFast(){
+  let kcal = document.getElementById("fastFood").value;
+  document.getElementById("result").innerText = kcal + " kcal";
+}
+
+function calcViet(){
+  const data = {
+    pho: { it:380, vua:450, nhieu:520 },
+    comtam: { it:500, vua:600, nhieu:700 },
+    bunbo: { it:420, vua:500, nhieu:580 },
+    banhmi: { it:350, vua:400, nhieu:450 },
+    hutieu: { it:380, vua:430, nhieu:500 }
+  };
+
+  let food = document.getElementById("vietFood").value;
+  let portion = document.getElementById("portion").value;
+
+  document.getElementById("result").innerText =
+    data[food][portion] + " kcal";
+}
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
+</script>
+
+</body>
+                             </html>
