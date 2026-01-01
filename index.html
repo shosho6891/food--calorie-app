@@ -63,30 +63,61 @@
 <script>
 const vietData = {
   main: {
-    "Phở bò": { it:380, vua:450, nhieu:520 },
-    "Phở gà": { it:350, vua:420, nhieu:500 },
-    "Bún đậu mắm tôm": { it:450, vua:550, nhieu:650 },
-    "Bún chả": { it:480, vua:560, nhieu:650 },
-    "Cơm tấm": { it:500, vua:600, nhieu:700 },
-    "Cơm gà xối mỡ": { it:550, vua:650, nhieu:750 },
-    "Mì Quảng": { it:430, vua:500, nhieu:580 }
-  },
+    "bun cha": {"aliases": ["bun cha"], "calo": 550, "meal": ["trua", "toi"]},
+"bun mam": {"aliases": ["bun mam"], "calo": 520, "meal": ["trua"]},
+"bun thit nuong": {"aliases": ["bun thit nuong"], "calo": 520, "meal": ["trua", "toi"]},
+"bun moc": {"aliases": ["bun moc"], "calo": 430, "meal": ["sang", "trua"]},
+"bun ca": {"aliases": ["bun ca"], "calo": 450, "meal": ["sang", "trua"]},
+"hu tieu": {"aliases": ["hu tieu"], "calo": 430, "meal": ["sang", "trua"]},
+"hu tieu nam vang": {"aliases": ["hu tieu nam vang"], "calo": 480, "meal": ["sang", "trua"]},
+"mi quang": {"aliases": ["mi quang"], "calo": 510, "meal": ["sang", "trua"]},
+"pho ga": {"aliases": ["pho ga"], "calo": 430, "meal": ["sang", "trua"]},
+"bun bo hue": {"aliases": ["bun bo hue"], "calo": 480, "meal": ["sang", "trua"]},
+"com suon": {"aliases": ["com suon"], "calo": 650, "meal": ["trua", "toi"]},
+"com suon trung": {"aliases": ["com suon trung"], "calo": 700, "meal": ["trua", "toi"]},
+"com ca kho": {"aliases": ["com ca kho"], "calo": 600, "meal": ["trua", "toi"]},
+"com bo xao": {"aliases": ["com bo xao"], "calo": 620, "meal": ["trua", "toi"]},
+"com ga xoi mo": {"aliases": ["com ga xoi mo"], "calo": 680, "meal": ["trua", "toi"]},
+"thit kho tau": {"aliases": ["thit kho tau"], "calo": 500, "meal": ["trua", "toi"]},
+"ca chien": {"aliases": ["ca chien"], "calo": 420, "meal": ["trua", "toi"]},
+"thit heo quay": {"aliases": ["thit heo quay"], "calo": 520, "meal": ["trua", "toi"]},
+"bo kho": {"aliases": ["bo kho"], "calo": 480, "meal": ["sang", "trua"]},
+"ga nuong": {"aliases": ["ga nuong"], "calo": 360, "meal": ["trua", "toi"]}
+  
   veg: {
-    "Rau luộc": { it:50, vua:80, nhieu:120 },
-    "Salad rau": { it:70, vua:120, nhieu:180 },
-    "Bông cải xanh": { it:40, vua:70, nhieu:100 },
-    "Cà rốt": { it:35, vua:60, nhieu:90 },
-    "Chuối": { it:90, vua:120, nhieu:150 },
-    "Táo": { it:60, vua:90, nhieu:120 }
-  },
+"canh rau": {"aliases": ["canh rau"], "calo": 120, "meal": ["trua", "toi"]},
+"canh bi": {"aliases": ["canh bi"], "calo": 140, "meal": ["trua", "toi"]},
+"canh cua": {"aliases": ["canh cua"], "calo": 160, "meal": ["trua", "toi"]},
+"rau xao": {"aliases": ["rau xao"], "calo": 180, "meal": ["trua", "toi"]},
+"dau hu sot ca": {"aliases": ["dau hu sot ca"], "calo": 220, "meal": ["trua", "toi"]},
+"dau hu chien": {"aliases": ["dau hu chien"], "calo": 260, "meal": ["trua", "toi"]},
+"dua leo": {"aliases": ["dua leo"], "calo": 45, "meal": ["sang", "trua", "toi"]},
+"ca chua": {"aliases": ["ca chua"], "calo": 22, "meal": ["sang", "trua", "toi"]},
+"sup rau cu": {"aliases": ["sup rau cu"], "calo": 180, "meal": ["sang", "trua"]},
+"chao trang": {"aliases": ["chao trang"], "calo": 300, "meal": ["sang"]}
   seed: {
-    "Hạt điều": { it:150, vua:200, nhieu:250 },
-    "Hạnh nhân": { it:140, vua:190, nhieu:240 },
-    "Óc chó": { it:160, vua:210, nhieu:260 },
-    "Yến mạch": { it:120, vua:180, nhieu:240 },
-    "Đậu phộng": { it:150, vua:200, nhieu:260 }
-  }
-};
+    ,
+"xoai": {"aliases": ["xoai", "mango"], "calo": 99, "meal": ["sang", "trua", "toi"]},
+"du du": {"aliases": ["du du", "papaya"], "calo": 59, "meal": ["sang", "trua", "toi"]},
+"dua hau": {"aliases": ["dua hau", "watermelon"], "calo": 30, "meal": ["sang", "trua", "toi"]},
+"thom": {"aliases": ["thom", "pineapple"], "calo": 82, "meal": ["sang", "trua", "toi"]},
+"sua dau nanh": {"aliases": ["sua dau nanh", "soy milk"], "calo": 130, "meal": ["sang"]},
+"tra sua": {"aliases": ["tra sua", "milk tea"], "calo": 250, "meal": ["toi"]},
+"nuoc cam": {"aliases": ["nuoc cam", "orange juice"], "calo": 110, "meal": ["sang"]},
+"nuoc mia": {"aliases": ["nuoc mia", "sugarcane juice"], "calo": 180, "meal": ["trua"]},
+"sinh to bo": {"aliases": ["sinh to bo", "avocado smoothie"], "calo": 260, "meal": ["sang", "trua"]},
+"ca phe sua": {"aliases": ["ca phe sua", "milk coffee"], "calo": 120, "meal": ["sang"]}
+};,
+"banh canh": {"aliases": ["banh canh"], "calo": 460, "meal": ["sang", "trua"]},
+"banh beo": {"aliases": ["banh beo"], "calo": 220, "meal": ["sang"]},
+"banh khot": {"aliases": ["banh khot"], "calo": 430, "meal": ["sang", "trua"]},
+"banh gio": {"aliases": ["banh gio"], "calo": 280, "meal": ["sang"]},
+"banh chung": {"aliases": ["banh chung"], "calo": 500, "meal": ["trua", "toi"]},
+"banh tet": {"aliases": ["banh tet"], "calo": 520, "meal": ["trua", "toi"]},
+"nem nuong": {"aliases": ["nem nuong"], "calo": 300, "meal": ["trua", "toi"]},
+"cha lua": {"aliases": ["cha lua"], "calo": 200, "meal": ["sang", "trua"]},
+"banh trang nuong": {"aliases": ["banh trang nuong"], "calo": 350, "meal": ["toi"]},
+"banh trang tron": {"aliases": ["banh trang tron"], "calo": 380, "meal": ["toi"]}
 
 function showTab(tab){
   document.getElementById("fast").style.display = tab==="fast"?"block":"none";
